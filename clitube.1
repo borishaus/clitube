@@ -1,0 +1,126 @@
+.TH CLITUBE 1 "November 2025" "cliTube 1.0" "User Commands"
+.SH NAME
+clitube \- CLI YouTube Player with memorable aliases
+.SH SYNOPSIS
+.B clitube
+[\fB\-v\fR|\fB\-\-video\fR]
+.I alias
+.br
+.B clitube add
+.I alias url
+.br
+.B clitube list
+.br
+.B clitube remove
+.I alias
+.br
+.B clitube
+[\fB\-h\fR|\fB\-\-help\fR|\fBhelp\fR]
+.SH DESCRIPTION
+.B clitube
+is a command-line tool for streaming YouTube videos using memorable aliases. It allows you to save YouTube URLs with custom names and quickly play them without remembering full URLs.
+.PP
+By default, cliTube streams audio-only to save bandwidth. Use the \fB\-v\fR or \fB\-\-video\fR flag to stream both video and audio.
+.SH OPTIONS
+.TP
+.BR \-v ", " \-\-video
+Stream both video and audio. Without this flag, only audio is streamed.
+.TP
+.BR \-h ", " \-\-help ", " help
+Display help message and exit.
+.SH COMMANDS
+.TP
+.BI "add " "alias url"
+Store a YouTube URL with a custom alias. The alias can be any memorable name.
+.TP
+.I alias
+Play audio from a saved alias. This is the default behavior when no command is specified.
+.TP
+.B list
+Display all saved aliases and their corresponding URLs.
+.TP
+.BI "remove " alias
+.TQ
+.BI "rm " alias
+Remove an alias from the saved mappings.
+.SH EXAMPLES
+Add a new video alias:
+.PP
+.nf
+.RS
+clitube add lofigirl "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+.RE
+.fi
+.PP
+Play audio only (default):
+.PP
+.nf
+.RS
+clitube lofigirl
+.RE
+.fi
+.PP
+Play with video:
+.PP
+.nf
+.RS
+clitube \-v lofigirl
+.RE
+.fi
+.PP
+List all saved aliases:
+.PP
+.nf
+.RS
+clitube list
+.RE
+.fi
+.PP
+Remove an alias:
+.PP
+.nf
+.RS
+clitube remove lofigirl
+.RE
+.fi
+.SH FILES
+.TP
+.I ~/.config/clitube/videos.json
+Configuration file storing alias-to-URL mappings in JSON format.
+.TP
+.I ~/.config/clitube/history.json
+Playback history tracking the most recently played videos.
+.SH DEPENDENCIES
+.B clitube
+requires
+.BR mpv (1)
+to be installed on the system. mpv is used for streaming audio and video directly from YouTube URLs.
+.PP
+Install mpv using your package manager:
+.PP
+.nf
+.RS
+# Ubuntu/Debian
+sudo apt install mpv
+
+# macOS
+brew install mpv
+
+# Arch Linux
+sudo pacman \-S mpv
+.RE
+.fi
+.SH EXIT STATUS
+.TP
+.B 0
+Success
+.TP
+.B 1
+Error occurred (alias not found, mpv not installed, invalid arguments, etc.)
+.SH AUTHOR
+Written for YouTube streaming enthusiasts who prefer the command line.
+.SH BUGS
+Report bugs at: https://github.com/yourusername/clitube/issues
+.SH SEE ALSO
+.BR mpv (1),
+.BR youtube-dl (1)
