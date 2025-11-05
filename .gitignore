@@ -18,3 +18,4 @@ go.work
 # Claude Code configuration
 .claude/
 CLAUDE.md
+.github-issue-draft.md

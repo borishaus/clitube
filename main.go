@@ -6,12 +6,6 @@ import (
 )
 
 func printUsage() {
-	// TODO: UPDATE HELP TEXT
-	// After you implement the "play" command, you'll need to update these instructions!
-	// Change "clitube <alias>" to "clitube play <alias>"
-	// Also update "clitube -v <alias>" to "clitube -v play <alias>" or "clitube play -v <alias>"
-	// depending on how you want the -v flag to work with the play command
-
 	fmt.Println("cliTube - CLI YouTube Player")
 	fmt.Println("\nStream YouTube videos using memorable aliases")
 	fmt.Println("\nUsage:")
@@ -24,15 +18,14 @@ func printUsage() {
 	fmt.Println("  clitube rm <alias>            Remove an alias (short form)")
 	fmt.Println("  clitube help                  Show this help message")
 	fmt.Println("\nExamples:")
-	// TODO: UPDATE THESE EXAMPLES TOO!
 	fmt.Println("  # Add a lofi music stream")
 	fmt.Println("  clitube add lofigirl \"https://www.youtube.com/watch?v=jfKfPfyJRdk\"")
 	fmt.Println("")
 	fmt.Println("  # Play audio only (saves bandwidth)")
-	fmt.Println("  clitube lofigirl")  // TODO: Change to "clitube play lofigirl"
+	fmt.Println("  clitube lofigirl")
 	fmt.Println("")
 	fmt.Println("  # Play with video")
-	fmt.Println("  clitube -v lofigirl")  // TODO: Update this based on how you handle -v flag with play command
+	fmt.Println("  clitube -v lofigirl")
 	fmt.Println("")
 	fmt.Println("  # See what you have saved")
 	fmt.Println("  clitube list")
@@ -123,12 +116,6 @@ func handleRemove(args []string) error {
 	return nil
 }
 
-// TODO: UPDATE THIS FUNCTION SIGNATURE
-// Currently: handlePlay(alias string, videoMode bool)
-// After fix: You might want to change this to handlePlay(args []string, videoMode bool)
-//            Then extract the alias from args[0], similar to handleAdd() and handleRemove()
-// Don't forget to check if args has at least 1 element before accessing args[0]!
-
 func handlePlay(alias string, videoMode bool) error {
 	url, err := GetURL(alias)
 	if err != nil {
@@ -145,15 +132,14 @@ func handlePlay(alias string, videoMode bool) error {
 }
 
 func printFirstRunHints() {
-	// TODO: UPDATE FIRST RUN HINTS TOO!
 	fmt.Println("┌─────────────────────────────────────────────────────────────────┐")
 	fmt.Println("│ Welcome to cliTube! Here are some tips to get started:         │")
 	fmt.Println("└─────────────────────────────────────────────────────────────────┘")
 	fmt.Println()
 	fmt.Println("📝 Quick Start:")
 	fmt.Println("   1. Add a video:    clitube add lofi \"https://youtube.com/watch?v=...\"")
-	fmt.Println("   2. Play audio:     clitube lofi")        // TODO: Change to "clitube play lofi"
-	fmt.Println("   3. Play video:     clitube -v lofi")     // TODO: Update based on your -v flag implementation
+	fmt.Println("   2. Play audio:     clitube lofi")
+	fmt.Println("   3. Play video:     clitube -v lofi")
 	fmt.Println()
 	fmt.Println("💡 Tips:")
 	fmt.Println("   • By default, only audio is streamed (saves bandwidth)")
@@ -217,21 +203,6 @@ func main() {
 
 	var err error
 
-	// TODO: FIX COMMAND STRUCTURE
-	// Current problem: The "default" case assumes any unknown command is an alias to play.
-	// This means if a user creates an alias called "add" or "rm", it conflicts with built-in commands!
-	//
-	// HINT: You want users to run "clitube play lofigirl" instead of "clitube lofigirl"
-	// This means:
-	// 1. Add a new case for "play" in the switch statement below
-	// 2. The "play" case should expect an alias in the args (similar to how "add" works)
-	// 3. Remove or change the "default" case since we don't want to assume unknown commands are aliases
-	// 4. Think about what error message to show if someone runs "clitube unknowncommand"
-	//
-	// Look at how handleAdd() receives args - handlePlay() should work similarly!
-	// Currently handlePlay(command, videoMode) receives the alias as the first parameter,
-	// but after your fix it should receive it from args[0] instead.
-
 	switch command {
 	case "add":
 		err = handleAdd(args)
@@ -243,8 +214,6 @@ func main() {
 		printUsage()
 		return
 	default:
-		// PROBLEM: This assumes any unknown command is an alias to play
-		// This causes conflicts if someone names their video "add", "rm", "list", etc.
 		err = handlePlay(command, videoMode)
 	}
 
