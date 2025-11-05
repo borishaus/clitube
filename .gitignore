@@ -17,3 +17,4 @@ go.work
 
 # Claude Code configuration
 .claude/
+CLAUDE.md
