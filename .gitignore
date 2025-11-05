@@ -15,6 +15,3 @@ clitube
 # Go workspace file
 go.work
 
-# Claude Code configuration
-.claude/
-CLAUDE.md
